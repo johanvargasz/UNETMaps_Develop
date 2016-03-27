@@ -12,8 +12,9 @@ var edificioSchema = new Schema({
   descripcion : { type : String,required: true},
   caracteristicas: [{
   		 tipo: {type:String} ,
-  		 valor: {type: String}} ],
-  pisos: 		[ {type: Schema.Types.ObjectId, ref: 'piso'} ]
+  		 valor: {type: String}  }],
+  pisos: [ {type: Schema.Types.ObjectId, ref: 'piso' } ]
+  
 });
 
 module.exports = mongoose.model('edificio', edificioSchema);

@@ -20,16 +20,6 @@ exports.crearEdificio = function(req, callback){
 	});
 	newEdificio.caracteristicas.push( req.body.edificioCaracteristicas);
 
-
-	for (var num = 0; num < req.body.cantidadPisos; num++){ 
-		   console.log("esta en "+num);
-		   console.log("con"+req.body.pisos[num]);
- 			pisoController.crearPiso(req.body.pisos[num],function (pisoCreado) {
-
-		newEdificio.pisos.push(pisoCreado._id);
-		});
-	}
-
 	    
 	newEdificio.save(function(error,result)
 		{
@@ -43,10 +33,19 @@ exports.crearEdificio = function(req, callback){
 		});
 
 }
+exports.actualizarEdificio = function( nombreEdificio,id,callback){
+
+	edificio.update({ nombre : nombreEdificio },{ $push :{ pisos : id }},function(error,result){
+	
+			if(error){
+			console.log("error al actualizar edificio")
+		}
+	 });
+}
+
 exports.verEdificioYPisos = function( req ,callback){
 
-
-edificio.find({ nombre : req.body.nombre},function(error, result){
+	edificio.find({ nombre : req.body.nombre},{ __v :0 }).populate('pisos',{ __v :0 }).exec(function(error, result){
 		if (error)
 			{
 				callback(error)
@@ -55,15 +54,6 @@ edificio.find({ nombre : req.body.nombre},function(error, result){
 			}
 
 	});
-/*	edificio.find({ nombre : req.body.nombre}).populate('piso').exec(function(error, result){
-		if (error)
-			{
-				callback(error)
-			}else{
-				callback(result)
-			}
-
-	});*/
 
 }
 

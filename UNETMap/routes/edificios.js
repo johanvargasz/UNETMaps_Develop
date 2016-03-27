@@ -2,7 +2,7 @@ var express = require('express');
 var routerEdificio = express.Router();
 var mongoose = require('mongoose');  	
 
-
+var pisoController = require("../controllers/pisoController.js");
 var edificioController = require("../controllers/edificioController.js");
 
 
@@ -10,7 +10,14 @@ var edificioController = require("../controllers/edificioController.js");
 
   	edificioController.crearEdificio(req, function(result){
 
-  		res.json(result);
+          for (var num = 0; num < req.body.cantidadPisos; num++){ 
+                     
+              pisoController.crearPiso(req.body.pisos[num],req.body.edificioNombre); 
+                    if(num==req.body.cantidadPisos-1 )
+                      res.json(result);
+                 
+          }
+  		
 
   	});
 

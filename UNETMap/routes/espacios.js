@@ -7,7 +7,7 @@ var espacioController = require("../controllers/espacioController.js");
 
   routerEspacio.post('/crearEspacio', function(req, res, next) {
 
-  	edificioController.crearEspacio(req, function(result){
+  	espacioController.crearEspacio(req, function(result){
 
   		res.json(result);
 
@@ -19,7 +19,7 @@ var espacioController = require("../controllers/espacioController.js");
 
   routerEspacio.post('/verEspacio', function(req, res, next) {
 
-  	edificioController.verEspacio(req, function(result){
+  	espacioController.verEspacio(req, function(result){
 
   		res.json(result);
 

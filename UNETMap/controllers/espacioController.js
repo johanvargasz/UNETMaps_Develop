@@ -13,9 +13,9 @@ exports.crearEspacio = function(req, callback){
 
 	var newEspacio = new espacio({
 		nombre : req.body.espacioNombre,
-		tipoEspacio :   req.type.tipoEspacio  ,
+		tipoEspacio :   req.body.tipoEspacio,
         coordenada:     	req.body.espacioCoordenada,
-        croquis :    { type: String , required: true},
+        croquis :    req.body.espacioCroquis,
         descripcion:  req.body.espacioDescripcion
         
 	});
@@ -29,9 +29,10 @@ exports.crearEspacio = function(req, callback){
 			}else{
 				pisoController.agregarEspacio(req.body.pisoId,newEspacio._id,function(error)
 					{
-						if(error) 
-							console.log("error al agregar espacio")
-					 	else  
+						if(error) { 
+							console.log("error al agregar espacio al piso")
+					 		callback(error)
+					 	}else  
 					 		callback(result)		
 					});
 				

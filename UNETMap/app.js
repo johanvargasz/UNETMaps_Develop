@@ -47,6 +47,7 @@ var routerAdministrador =require('./routes/administradores.js')
 
 app.use(routerAdministrador);
 app.use(routerEdificio);
+app.use(routerEspacio);
 app.use(routerTipoEspacio);
 app.use(routerComentario);
 app.use(routerUsuarioBloqueado);
